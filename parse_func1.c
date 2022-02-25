@@ -1,63 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_func1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:38:07 by yolee             #+#    #+#             */
-/*   Updated: 2022/02/17 18:06:34 by yolee            ###   ########.fr       */
+/*   Updated: 2022/02/25 19:56:04 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	parse_char(va_list ap)
+void	parse_char(va_list ap)
 {
-	
+	char	ch;
+
+	ch = va_arg(ap, int);
+	write(1, &ch, 1);
 }
 
-int	parse_str(va_list ap)
+void	parse_str(va_list ap)
 {
+	char	*str;
 
+	str = va_arg(ap, char *);
+	write(1, str, ft_strlen(str));
 }
 
-int	parse_ptr(va_list ap)
+void	parse_ptr(va_list ap)
 {
+	void	*ptr;
+	char	*str;
 
+	ptr = va_arg(ap, void *);
+	str = ft_ptoa((unsigned long long) ptr);
+	write(1, str, ft_strlen(str));
+	free(str);
 }
 
-int	parse_decimal(va_list ap)
+void	parse_decimal(va_list ap)
 {
+	int		nbr;
+	char	*str;
 
-}
-
-int	parse_integer(va_list ap)
-{
-
-}
-
-int	parse_unsigned(va_list ap)
-{
-
-}
-
-int	parse_hex_lower(va_list ap)
-{
-
-}
-
-int	parse_hex_upper(va_list ap)
-{
-
-}
-
-int	parse_percent(va_list ap)
-{
-
-}
-
-int	parse_none(va_list ap)
-{
-
+	nbr = va_arg(ap, int);
+	str = ft_itoa(nbr);
+	write(1, str, ft_strlen(str));
+	free(str);
 }
