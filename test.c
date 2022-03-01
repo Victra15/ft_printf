@@ -6,81 +6,34 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:19:46 by yolee             #+#    #+#             */
-/*   Updated: 2022/02/09 17:10:54 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/01 18:18:32 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdarg.h>
 #include "ft_printf.h"
+#include "libft.h"
 
 int	main(void)
 {
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf(""));
-	printf("\n");
-	printf("(printf) return : %d		output :", printf(""));
-	printf("\n");
+	int		a;
+	int		ft_ret;
+	int		ret;
 
-	printf("%%c test");
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf("%c", 'a'));
+	a = 10;
+	printf("[ft_printf] ");
 	printf("\n");
-	printf("(printf) return : %d		output :", printf("%c", 'a'));
+	ft_ret = ft_printf("%p", &a);
+	printf("\t");
+	printf("return : %d", ft_ret);
 	printf("\n");
-
-	printf("%%s test");
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf("%s", "abc"));
+	printf("[printf] ");
 	printf("\n");
-	printf("(printf) return : %d		output :", printf("%s", "abc"));
+	ret = printf("%p", &a);
+	printf("\t");
+	printf("return : %d", ret);
 	printf("\n");
-
-	printf("%%p test");
-	void	*ptr;
-
-	ptr = malloc(1);
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf("%p", ptr));
 	printf("\n");
-	printf("(printf) return : %d		output :", printf("%p", ptr));
-	printf("\n");
-	free(ptr);
-
-	printf("%%c test");
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf("%c", 'a'));
-	printf("\n");
-	printf("(printf) return : %d		output :", printf("%c", 'a'));
-	printf("\n");
-
-	printf("%%c test");
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf("%c", 'a'));
-	printf("\n");
-	printf("(printf) return : %d		output :", printf("%c", 'a'));
-	printf("\n");
-
-	printf("%%c test");
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf("%c", 'a'));
-	printf("\n");
-	printf("(printf) return : %d		output :", printf("%c", 'a'));
-	printf("\n");
-
-	printf("%%c test");
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf("%c", 'a'));
-	printf("\n");
-	printf("(printf) return : %d		output :", printf("%c", 'a'));
-	printf("\n");
-
-	printf("%%c test");
-	printf("empty str test");
-	printf("(ft_printf) return : %d		output :", ft_printf("%c", 'a'));
-	printf("\n");
-	printf("(printf) return : %d		output :", printf("%c", 'a'));
-	printf("\n");
-
 	return (0);
 }
