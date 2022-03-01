@@ -6,7 +6,7 @@
 #    By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/26 17:02:47 by yolee             #+#    #+#              #
-#    Updated: 2022/03/01 23:11:50 by yolee            ###   ########.fr        #
+#    Updated: 2022/03/01 23:42:27 by yolee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ LIBFT_DIR = ./libft
 LIBFT = libft.a
 
 SRCS = ft_printf.c \
-	ft_itoa_hex.c \
-	ft_ptoa.c \
+	ft_uitoa_hex.c \
 	ft_uitoa.c \
+	ft_ptoa.c \
 	parse_func1.c \
 	parse_func2.c \
 

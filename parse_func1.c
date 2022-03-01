@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:38:07 by yolee             #+#    #+#             */
-/*   Updated: 2022/02/26 03:01:40 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/01 23:27:39 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,17 @@ void	parse_str(va_list *ap, size_t *print_len)
 	size_t	len;
 
 	str = va_arg((*ap), char *);
-	len = ft_strlen(str);
-	write(1, str, len);
-	(*print_len) += len;
+	if (str == NULL)
+	{
+		write(1, "(null)", 6);
+		(*print_len) += 6;
+	}
+	else
+	{
+		len = ft_strlen(str);
+		write(1, str, len);
+		(*print_len) += len;
+	}
 }
 
 void	parse_ptr(va_list *ap, size_t *print_len)
