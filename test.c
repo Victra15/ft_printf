@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:19:46 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/01 23:52:05 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/02 01:01:18 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdarg.h>
 #include <limits.h>
 #include "ft_printf.h"
-#include "libft.h"
 
 int	main(void)
 {

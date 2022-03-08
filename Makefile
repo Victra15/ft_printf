@@ -6,14 +6,14 @@
 #    By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/26 17:02:47 by yolee             #+#    #+#              #
-#    Updated: 2022/03/01 23:42:27 by yolee            ###   ########.fr        #
+#    Updated: 2022/03/09 00:46:55 by yolee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I ./libft
+CFLAGS = -Wall -Wextra -Werror -I ./libft -I ./srcs
 
 AR = ar
 ARFLAGS = -rcs
@@ -21,20 +21,26 @@ ARFLAGS = -rcs
 LIBFT_DIR = ./libft
 LIBFT = libft.a
 
-SRCS = ft_printf.c \
+SRCS_DIR = ./srcs
+SRCS_FILE = ft_printf.c \
 	ft_uitoa_hex.c \
 	ft_uitoa.c \
 	ft_ptoa.c \
 	parse_func1.c \
 	parse_func2.c \
+	
+SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
 
-SRCS_B = ft_printf_bonus.c \
-	ft_itoa_hex_bonus.c \
-	ft_ptoa_bonus.c \
+SRCS_DIR_B = ./bonus
+SRCS_FILE_B = ft_printf_bonus.c \
+	ft_uitoa_hex_bonus.c \
 	ft_uitoa_bonus.c \
+	ft_ptoa_bonus.c \
 	parse_func1_bonus.c \
 	parse_func2_bonus.c \
 
+SRCS_B = $(addprefix $(SRCS_DIR_B)/, $(SRCS_FILE_B))
+	
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
 
@@ -68,4 +74,4 @@ fclean : clean
 	
 re : fclean bonus
 	
-.PHONY : libft bonus all clean fclean re
+.PHONY : bonus all clean fclean re

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:21:19 by yolee             #+#    #+#             */
-/*   Updated: 2022/02/26 03:02:07 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/02 01:11:23 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-void	print_format_str(va_list *ap, const char **iter, size_t *print_len)
+static void	print_format_str(va_list *ap, const char **iter, size_t *print_len)
 {
 	char	format_char;
 
@@ -40,7 +40,7 @@ void	print_format_str(va_list *ap, const char **iter, size_t *print_len)
 	(*iter)++;
 }
 
-size_t	print_substr(const char *start, const char *end)
+static size_t	print_substr(const char *start, const char *end)
 {
 	size_t	print_len;
 
@@ -50,7 +50,7 @@ size_t	print_substr(const char *start, const char *end)
 	return (print_len);
 }
 
-void	print_parsed_str(va_list *ap, const char *str, size_t *print_len)
+static void	print_parsed_str(va_list *ap, const char *str, size_t *print_len)
 {
 	const char	*iter;
 	const char	*temp_iter;
