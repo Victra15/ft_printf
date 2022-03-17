@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:03:43 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/15 17:41:01 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/17 16:45:04 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,50 +31,42 @@ void	init_flags(t_pflag *print_flags)
 	print_flags->precision = 0;
 }
 
-static int	ft_isoverflowed(long long *conv_num, const int sign)
+unsigned int	ft_atoui_precision_iter(const char **str)
 {
-	if (((*conv_num) * sign) < 0)
+	unsigned int	conv_num;
+
+	(*str)++;
+	conv_num = 0;
+	while (ft_isdigit(**str))
 	{
-		if (sign < 0)
-			(*conv_num) = 0;
-		else
-			(*conv_num) = -1;
+		conv_num = (conv_num * 10) + ((**str) - '0');
+		(*str)++;
+	}
+	return (conv_num);
+}
+
+static int	ft_isoverflowed(long long *conv_num)
+{
+	if ((*conv_num) > 2147483645)
+	{
+		(*conv_num) = -1;
 		return (1);
 	}
 	else
 		return (0);
 }
 
-int	ft_dtoi_iter(const char **str)
+int	ft_atoi_width_iter(const char **str)
 {
 	long long	conv_num;
-	int			sign;
 
-	sign = 1;
 	conv_num = 0;
 	while (ft_isdigit(**str))
 	{
-		conv_num = (conv_num * 10) + ((sign) * ((**str) - '0'));
-		if (ft_isoverflowed(&conv_num, sign))
+		conv_num = (conv_num * 10) + ((**str) - '0');
+		if (ft_isoverflowed(&conv_num))
 			break ;
 		(*str)++;
 	}
 	return ((int)(conv_num));
-}
-
-long long	ft_dtol_iter(const char **str)
-{
-	long long	conv_num;
-	int			sign;
-
-	sign = 1;
-	conv_num = 0;
-	while (ft_isdigit(**str))
-	{
-		conv_num = (conv_num * 10) + ((sign) * ((**str) - '0'));
-		if (ft_isoverflowed(&conv_num, sign))
-			break ;
-		(*str)++;
-	}
-	return (conv_num);
 }

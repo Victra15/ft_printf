@@ -6,13 +6,13 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:21:19 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/08 22:26:47 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/17 18:16:01 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	print_format_str(va_list *ap, const char **iter, size_t *print_len)
+static void	print_format_str(va_list *ap, const char **iter, int *print_len)
 {
 	char	format_char;
 
@@ -40,17 +40,7 @@ static void	print_format_str(va_list *ap, const char **iter, size_t *print_len)
 	(*iter)++;
 }
 
-static size_t	print_substr(const char *start, const char *end)
-{
-	size_t	print_len;
-
-	print_len = end - start;
-	if (print_len)
-		write(1, start, print_len);
-	return (print_len);
-}
-
-static void	print_parsed_str(va_list *ap, const char *str, size_t *print_len)
+static void	print_parsed_str(va_list *ap, const char *str, int *print_len)
 {
 	const char	*iter;
 	const char	*temp_iter;
@@ -63,10 +53,14 @@ static void	print_parsed_str(va_list *ap, const char *str, size_t *print_len)
 		if (!iter)
 		{
 			iter = ft_strchr(temp_iter, '\0');
-			(*print_len) += print_substr(temp_iter, iter);
+			(*print_len) += iter - temp_iter;
+			if (iter - temp_iter)
+				write(1, temp_iter, iter - temp_iter);
 			break ;
 		}
-		(*print_len) += print_substr(temp_iter, iter);
+		(*print_len) += iter - temp_iter;
+		if (iter - temp_iter)
+			write(1, temp_iter, iter - temp_iter);
 		iter++;
 		print_format_str(ap, &iter, print_len);
 	}
@@ -75,7 +69,7 @@ static void	print_parsed_str(va_list *ap, const char *str, size_t *print_len)
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
-	size_t	print_len;
+	int		print_len;
 
 	print_len = 0;
 	va_start(ap, str);

@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:38:07 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/15 16:40:54 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/17 18:27:44 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	parse_decimal(va_list *ap, size_t *print_len, t_pflag print_flags)
 	free(str);
 }
 
-void	parse_percent(size_t *print_len, t_pflag print_flags)
+void	parse_etc(char *iter, size_t *print_len, t_pflag print_flags)
 {
-	write(1, "%", 1);
+	write(1, iter, 1);
 	(*print_len) += 1;
 }

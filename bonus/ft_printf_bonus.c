@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:21:19 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/15 17:36:51 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/17 18:52:55 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	parse_with_flag(va_list *ap,
 			const char **iter,
-			size_t *print_len,
+			int *print_len,
 			t_pflag print_flags)
 {
 	char	format_char;
@@ -36,10 +36,8 @@ static void	parse_with_flag(va_list *ap,
 		parse_lower_hexadecimal(ap, print_len, print_flags);
 	else if (format_char == 'X')
 		parse_upper_hexadecimal(ap, print_len, print_flags);
-	else if (format_char == '%')
-		parse_percent(print_len, print_flags);
 	else
-		parse_none(print_len, print_flags);
+		parse_etc((*iter), print_len, print_flags);
 	(*iter)++;
 }
 
@@ -56,20 +54,17 @@ static void	read_flags(const char **iter, t_pflag *print_flags)
 	else if ((**iter) == '0')
 		print_flags->zero_pad = 1;
 	else if (ft_isdigit_except_0(**iter))
-		print_flags->width = ft_dtoi_iter(iter);
+		print_flags->width = ft_atoi_width_iter(iter);
 	else if ((**iter) == '.')
-	{
-		(*iter)++;
-		print_flags->precision = ft_dtoi_iter(iter);
-	}
+		print_flags->precision = ft_atoui_precision_iter(iter);
 }
 
-static void	print_format_str(va_list *ap, const char **iter, size_t *print_len)
+static void	print_format_str(va_list *ap, const char **iter, int *print_len)
 {
 	t_pflag	print_flags;
 
 	init_flags(&print_flags);
-	while (1)
+	while ((*print_len) >= 0)
 	{
 		if ((**iter) == '#'
 			|| (**iter) == ' '
@@ -83,16 +78,17 @@ static void	print_format_str(va_list *ap, const char **iter, size_t *print_len)
 			parse_with_flag(ap, iter, print_len, print_flags);
 			break ;
 		}
+		(*iter)++;
 	}
 }
 
-static void	print_parsed_str(va_list *ap, const char *str, size_t *print_len)
+static void	print_parsed_str(va_list *ap, const char *str, int *print_len)
 {
 	const char	*iter;
 	const char	*temp_iter;
 
 	iter = str;
-	while (1)
+	while ((*print_len) >= 0)
 	{
 		temp_iter = iter;
 		iter = ft_strchr(temp_iter, '%');
@@ -115,7 +111,7 @@ static void	print_parsed_str(va_list *ap, const char *str, size_t *print_len)
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
-	size_t	print_len;
+	int		print_len;
 
 	print_len = 0;
 	va_start(ap, str);
