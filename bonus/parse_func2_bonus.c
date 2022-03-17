@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:38:07 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/02 01:10:21 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/15 16:43:40 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void	conv_to_upper(unsigned int idx, char *str)
 		(*str) = ft_toupper((*str));
 }
 
-void	parse_unsigned_decimal(va_list *ap, size_t *print_len)
+void	parse_unsigned_decimal(va_list *ap,
+		size_t *print_len,
+		t_pflag print_flags)
 {
 	unsigned int	nbr;
 	char			*str;
@@ -32,7 +34,9 @@ void	parse_unsigned_decimal(va_list *ap, size_t *print_len)
 	free(str);
 }
 
-void	parse_lower_hexadecimal(va_list *ap, size_t *print_len)
+void	parse_lower_hexadecimal(va_list *ap,
+		size_t *print_len,
+		t_pflag print_flags)
 {
 	int		nbr;
 	char	*str;
@@ -46,7 +50,9 @@ void	parse_lower_hexadecimal(va_list *ap, size_t *print_len)
 	free(str);
 }
 
-void	parse_upper_hexadecimal(va_list *ap, size_t *print_len)
+void	parse_upper_hexadecimal(va_list *ap,
+		size_t *print_len,
+		t_pflag print_flags)
 {
 	int		nbr;
 	char	*str;
