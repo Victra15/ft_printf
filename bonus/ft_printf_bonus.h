@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:22:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/19 00:31:55 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/20 15:30:44 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 typedef struct s_pflag
 {
-	int				alter_form;
-	int				zero_pad;
-	int				left_adjust;
-	int				add_blank;
-	int				sign_display;
-	int				width;
-	unsigned int	precision;
+	int	alter_form;
+	int	zero_pad;
+	int	left_adjust;
+	int	add_blank;
+	int	sign_display;
+	int	width;
+	int	precision;
 }t_pflag;
 
 int				ft_printf(const char *str, ...);
