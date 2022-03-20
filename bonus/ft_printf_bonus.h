@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:22:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/20 15:30:44 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/20 16:37:19 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,6 @@ int				ft_isdigit_except_0(int c);
 void			init_flags(t_pflag *print_flags);
 unsigned int	ft_atoui_precision_iter(const char **str);
 int				ft_atoi_width_iter(const char **str);
+void			fill_with_blank(unsigned int idx, char *str);
+void			fill_with_zero(unsigned int idx, char *str);
 #endif

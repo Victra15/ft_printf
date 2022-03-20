@@ -6,19 +6,20 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:38:07 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/17 18:27:44 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/20 16:37:18 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	parse_char(va_list *ap, size_t *print_len, t_pflag print_flags)
+void	fill_with_blank(unsigned int idx, char *str)
 {
-	char	ch;
+	(*str) = ' ';
+}
 
-	ch = va_arg((*ap), int);
-	write(1, &ch, 1);
-	(*print_len) += 1;
+void	fill_with_zero(unsigned int idx, char *str)
+{
+	(*str) = '0';
 }
 
 void	parse_str(va_list *ap, size_t *print_len, t_pflag print_flags)
