@@ -6,11 +6,34 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:03:43 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/17 16:45:04 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/19 15:25:10 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+
+int	is_invalid_flag(const char parse_char, t_pflag print_flags, int *print_len)
+{
+	if (print_flags.width == -1)
+	{
+		print_len = -1;
+		return (1);
+	}
+	else if ((print_flags.precision == INT32_MAX)
+		&& (parse_char == 'd'
+			|| parse_char == 'i'
+			|| parse_char == 'u'
+			|| parse_char == 'x'
+			|| parse_char == 'X'
+			|| parse_char == 'p'
+		))
+	{
+		print_len = -1;
+		return (1);
+	}
+	else
+		return (0);
+}
 
 int	ft_isdigit_except_0(int c)
 {
@@ -45,17 +68,6 @@ unsigned int	ft_atoui_precision_iter(const char **str)
 	return (conv_num);
 }
 
-static int	ft_isoverflowed(long long *conv_num)
-{
-	if ((*conv_num) > 2147483645)
-	{
-		(*conv_num) = -1;
-		return (1);
-	}
-	else
-		return (0);
-}
-
 int	ft_atoi_width_iter(const char **str)
 {
 	long long	conv_num;
@@ -64,8 +76,11 @@ int	ft_atoi_width_iter(const char **str)
 	while (ft_isdigit(**str))
 	{
 		conv_num = (conv_num * 10) + ((**str) - '0');
-		if (ft_isoverflowed(&conv_num))
+		if (conv_num > 2147483645)
+		{
+			conv_num = -1;
 			break ;
+		}
 		(*str)++;
 	}
 	return ((int)(conv_num));

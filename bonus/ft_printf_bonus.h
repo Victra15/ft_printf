@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:22:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/17 18:28:19 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/19 00:31:55 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void			parse_upper_hexadecimal(va_list *ap,
 					size_t *print_len,
 					t_pflag print_flags);
 void			parse_etc(char *iter, size_t *print_len, t_pflag print_flags);
+int				is_invalid_flag(const char parse_char,
+					t_pflag print_flags,
+					int *print_len);
 int				ft_isdigit_except_0(int c);
 void			init_flags(t_pflag *print_flags);
 unsigned int	ft_atoui_precision_iter(const char **str);
