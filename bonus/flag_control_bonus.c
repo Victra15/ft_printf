@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:03:43 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/20 15:43:27 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/21 16:43:23 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,29 @@
 
 int	is_invalid_flag(const char parse_char, t_pflag print_flags, int *print_len)
 {
-	if (print_flags.alter_form == 1 && (parse_char == 'x' || parse_char == 'X'))
-		print_flags.precision += 2;
+	int	max_precision;
+
 	if (print_flags.width == -1)
 	{
 		print_len = -1;
 		return (1);
 	}
-	else if ((print_flags.precision >= 2147483647 - 1)
-		&& (parse_char == 'd'
-			|| parse_char == 'i'
-			|| parse_char == 'u'
-			|| parse_char == 'x'
-			|| parse_char == 'X'
-			|| parse_char == 'p'
-		))
+	max_precision = 2147483647 - 1;
+	if ((print_flags.add_blank == 1 || print_flags.sign_display == 1)
+		&& (parse_char == 'd' || parse_char == 'u' || parse_char == 'i'))
+		max_precision -= 1;
+	if (parse_char == 'p'
+		|| (print_flags.alter_form == 1
+			&& (parse_char == 'x' || parse_char == 'X')))
+		max_precision -= 2;
+	if (print_flags.precision >= max_precision
+		&& (parse_char == 'd' || parse_char == 'u' || parse_char == 'i'
+			|| parse_char == 'p' || parse_char == 'x' || parse_char == 'X'))
 	{
 		print_len = -1;
 		return (1);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 int	ft_isdigit_except_0(int c)
