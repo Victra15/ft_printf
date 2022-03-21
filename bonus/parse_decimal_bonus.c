@@ -5,74 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 16:25:45 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/21 18:22:18 by yolee            ###   ########.fr       */
+/*   Created: 2022/03/21 18:49:54 by yolee             #+#    #+#             */
+/*   Updated: 2022/03/21 18:59:51 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static void	input_str(char *i_str,
-		char *str,
-		size_t str_size,
-		t_pflag print_flags)
+static size_t	ft_intlen(int n)
 {
-	size_t	i_str_size;
+	size_t	len;
 
-	i_str_size = ft_strlen(i_str);
-	print_flags.precision -= i_str_size;
-	if (print_flags.left_adjust == 1)
-	{
-		if (print_flags.add_blank == 1)
-			ft_memset(str, ' ');
-		if (print_flags.precision > 0)
-			ft_memset(str, '0', print_flags.precision)
-		ft_memmove(str, i_str, i_str_size);
-		ft_memset(str, ' ', print_flags)
-	}
-	else
-	{
-
-	}
-	if (print_flags.zero_pad == 1);
-	print_flags.precision;
-}
-
-static int	str_allocate(char *i_str,
-		char *output,
-		t_pflag print_flags,
-		size_t *print_width)
-{
-	size_t	i_str_size;
-
-	i_str_size = ft_strlen(i_str);
-	print_flags.precision -= i_str_size;
-	print_width = print_flags.precision + i_str_size;
-	if ((*print_width) < print_flags.width)
-		(*print_width) = print_flags.precision;
-	if ((*print_width) < i_str_size)
-		(*print_width) = i_str_size;
-	output = (char *)malloc((*print_width) + 1);
-	if (output == NULL)
+	len = 0;
+	if (n == 0)
 		return (1);
-	output[(*print_width)] = '\0';
-	return (0);
+	if (n < 0)
+		len++;
+	while (n)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
 }
 
-void	parse_decimal(va_list *ap, size_t *print_len, t_pflag print_flags)
+static void	ft_str_input(char *i_str, int n, size_t len)
+{
+	int	sign;
+
+	i_str[len] = '\0';
+	len--;
+	if (n == 0)
+		i_str[0] = '0';
+	if (n < 0)
+		sign = -1;
+	else
+		sign = 1;
+	while (n)
+	{
+		i_str[len] = '0' + (sign) * (n % 10);
+		n = n / 10;
+		len--;
+	}
+	if (sign == -1)
+		i_str[len] = '-';
+}
+
+static char	*ft_itoa(int n, t_pflag *print_flags)
+{
+	char	*i_str;
+	size_t	i_len;
+
+	i_len = ft_intlen(n);
+	i_str = (char *)malloc(i_len + 1);
+	if (i_str == 0)
+		return (0);
+	ft_str_input(i_str, n, i_len);
+	return (i_str);
+}
+
+char	*parse_decimal(va_list *ap, t_pflag *print_flags)
 {
 	int		nbr;
-	char	*i_str;
-	char	*output;
-	size_t	print_width;
+	char	*str;
+	size_t	len;
 
 	nbr = va_arg((*ap), int);
-	i_str = ft_itoa(nbr);
-	if (str_allocate(i_str, output, print_flags, &print_width))
-		return ;
-	input_str(i_str, output, print_width, print_flags);
-	write(1, output, print_width);
-	(*print_len) += print_width;
-	free(i_str);
-	free(output);
+	str = ft_itoa(nbr, print_flags);
+	len = ft_strlen(str);
+	write(1, str, len);
+	free(str);
 }

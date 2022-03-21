@@ -6,38 +6,37 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:21:19 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/19 00:27:33 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/21 18:58:38 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static void	print_format_str(va_list *ap,
+static char	*read_format_str(va_list *ap,
 			const char **iter,
-			int *print_len,
-			t_pflag print_flags)
+			t_pflag *print_flags)
 {
 	char	format_char;
 
 	format_char = (**iter);
 	if (format_char == 'c')
-		parse_char(ap, print_len, print_flags);
+		return (parse_char(ap, print_flags));
 	else if (format_char == 's')
-		parse_str(ap, print_len, print_flags);
+		return (parse_str(ap, print_flags));
 	else if (format_char == 'p')
-		parse_ptr(ap, print_len, print_flags);
+		return (parse_ptr(ap, print_flags));
 	else if (format_char == 'd')
-		parse_decimal(ap, print_len, print_flags);
+		return (parse_decimal(ap, print_flags));
 	else if (format_char == 'i')
-		parse_decimal(ap, print_len, print_flags);
+		return (parse_decimal(ap, print_flags));
 	else if (format_char == 'u')
-		parse_unsigned_decimal(ap, print_len, print_flags);
+		return (parse_unsigned_decimal(ap, print_flags));
 	else if (format_char == 'x')
-		parse_lower_hexadecimal(ap, print_len, print_flags);
+		return (parse_lower_hexadecimal(ap, print_flags));
 	else if (format_char == 'X')
-		parse_upper_hexadecimal(ap, print_len, print_flags);
+		return (parse_upper_hexadecimal(ap, print_flags));
 	else
-		parse_etc((*iter), print_len, print_flags);
+		return (parse_etc((*iter), print_flags));
 	(*iter)++;
 }
 
@@ -78,6 +77,7 @@ static void	print_parsed_str(va_list *ap, const char *str, int *print_len)
 	const char	*iter;
 	const char	*temp_iter_1;
 	const char	*temp_iter_2;
+	char		*format_str;
 	t_pflag		print_flags;
 
 	init_flags(&print_flags);
@@ -94,10 +94,12 @@ static void	print_parsed_str(va_list *ap, const char *str, int *print_len)
 		}
 		iter = temp_iter_2 + 1;
 		read_flags(&iter, &print_flags);
+		format_str = read_format_str(ap, &iter, &print_flags);
+		if (format_str == NULL)
+			return ;
 		if (is_invalid_flag(*iter, print_flags, print_len))
 			return ;
 		print_substr(temp_iter_1, temp_iter_2, print_len);
-		print_format_str(ap, &iter, print_len, print_flags);
 	}
 }
 
