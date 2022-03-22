@@ -6,21 +6,18 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:03:43 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/21 16:43:23 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/22 17:20:17 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	is_invalid_flag(const char parse_char, t_pflag print_flags, int *print_len)
+int	is_invalid_flag(const char parse_char, t_pflag print_flags)
 {
 	int	max_precision;
 
 	if (print_flags.width == -1)
-	{
-		print_len = -1;
 		return (1);
-	}
 	max_precision = 2147483647 - 1;
 	if ((print_flags.add_blank == 1 || print_flags.sign_display == 1)
 		&& (parse_char == 'd' || parse_char == 'u' || parse_char == 'i'))
@@ -32,10 +29,7 @@ int	is_invalid_flag(const char parse_char, t_pflag print_flags, int *print_len)
 	if (print_flags.precision >= max_precision
 		&& (parse_char == 'd' || parse_char == 'u' || parse_char == 'i'
 			|| parse_char == 'p' || parse_char == 'x' || parse_char == 'X'))
-	{
-		print_len = -1;
 		return (1);
-	}
 	return (0);
 }
 
