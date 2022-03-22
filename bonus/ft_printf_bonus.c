@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:21:19 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 17:23:05 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/22 20:10:02 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	print_format_str(char **format_str,
 	print_flags.left_adjust;
 	print_flags.width;
 	print_flags.zero_pad;
+	free(*format_str);
+	format_str = NULL;
 }
 
 static void	print_substr(const char *start, const char *end, int *print_len)

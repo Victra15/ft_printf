@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:22:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 18:47:40 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/22 18:57:38 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char			*parse_decimal(va_list *ap,
 char			*parse_unsigned_decimal(va_list *ap, t_pflag *print_flags);
 char			*parse_lower_hexadecimal(va_list *ap, t_pflag *print_flags);
 char			*parse_upper_hexadecimal(va_list *ap, t_pflag *print_flags);
-char			*parse_etc(char *iter, t_pflag *print_flags);
+char			*parse_etc(char format_char, t_pflag *print_flags);
 
 int				is_invalid_flag(const char parse_char, t_pflag print_flags);
 int				ft_isdigit_except_0(int c);

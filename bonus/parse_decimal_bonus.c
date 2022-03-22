@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:54 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 18:27:29 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/22 19:56:46 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static size_t	ft_intlen(int n, t_pflag *print_flags)
 
 	len = 0;
 	if (n == 0)
-		return (1);
+		len++;
 	while (n)
 	{
 		n = n / 10;
@@ -41,7 +41,10 @@ static void	ft_str_input(char *i_str, int n, size_t len, t_pflag *print_flags)
 	i_str[len] = '\0';
 	len--;
 	if (n == 0)
-		i_str[0] = '0';
+	{
+		i_str[len] = '0';
+		len--;
+	}
 	if (n < 0)
 		sign = -1;
 	while (n)
@@ -76,7 +79,6 @@ char	*parse_decimal(va_list *ap, t_pflag *print_flags)
 {
 	char	*str;
 	int		nbr;
-	size_t	len;
 
 	nbr = va_arg((*ap), int);
 	str = ft_flag_itoa(nbr, print_flags);

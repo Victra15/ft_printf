@@ -6,13 +6,13 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:33:17 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 18:35:27 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/22 18:57:24 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-char	*parse_etc(char *iter, t_pflag *print_flags)
+char	*parse_etc(char format_char, t_pflag *print_flags)
 {
 	char	*str;
 
@@ -20,6 +20,6 @@ char	*parse_etc(char *iter, t_pflag *print_flags)
 	if (str == NULL)
 		return (NULL);
 	str[1] = '\0';
-	str[0] = (*iter);
+	str[0] = format_char;
 	return (str);
 }

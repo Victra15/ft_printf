@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:08:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 17:25:50 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/22 18:58:18 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static char	*parsing(va_list *ap,
 	else if (format_char == 'X')
 		return (parse_upper_hexadecimal(ap, print_flags));
 	else
-		return (parse_etc((*iter), print_flags));
-	(*iter)++;
+		return (parse_etc(format_char, print_flags));
 }
 
 static void	read_flags(const char **iter, t_pflag *print_flags)
@@ -72,6 +71,7 @@ int	read_format_str(va_list *ap,
 {
 	read_flags(&iter, &print_flags);
 	(*format_str) = parsing(ap, &iter, &print_flags);
+	(*iter)++;
 	if ((*format_str) == NULL)
 		return (1);
 	if (is_invalid_flag(*iter, *print_flags))
