@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 20:05:33 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 20:06:25 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/23 20:01:49 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,6 @@ static size_t	ft_intlen(unsigned int n, t_pflag *print_flags)
 	return (len);
 }
 
-static char	to_hex_str(unsigned int nbr)
-{
-	unsigned int	abs_digit_nbr;
-
-	abs_digit_nbr = nbr % 16;
-	if (abs_digit_nbr < 10)
-		return ('0' + abs_digit_nbr);
-	else
-		return ('a' - 10 + abs_digit_nbr);
-}
-
 static void	ft_str_input(char *i_str,
 		unsigned int n,
 		size_t len,
@@ -53,7 +42,10 @@ static void	ft_str_input(char *i_str,
 		i_str[len] = '0';
 	while (n)
 	{
-		i_str[len] = to_hex_str(n);
+		if ((n % 16) < 10)
+			i_str[len] = ('0' + (n % 16));
+		else
+			i_str[len] = ('a' - 10 + (n % 16));
 		n = n / 16;
 		len--;
 	}
@@ -78,11 +70,18 @@ static char	*ft_flag_uitoa_hex(unsigned int n, t_pflag *print_flags)
 	return (i_str);
 }
 
+static void	flag_ignore(t_pflag *print_flags)
+{
+	print_flags->add_blank = 0;
+	print_flags->sign_display = 0;
+}
+
 char	*parse_lower_hexadecimal(va_list *ap, t_pflag *print_flags)
 {
 	int		nbr;
 	char	*str;
 
+	flag_ignore(print_flags);
 	nbr = va_arg((*ap), int);
 	str = ft_flag_uitoa_hex(nbr, print_flags);
 	return (str);

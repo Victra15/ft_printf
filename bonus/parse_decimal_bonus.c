@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:49:54 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 19:56:46 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/23 19:54:46 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,17 @@ static char	*ft_flag_itoa(int n, t_pflag *print_flags)
 	return (i_str);
 }
 
+static void	flag_ignore(t_pflag *print_flags)
+{
+	print_flags->alter_form = 0;
+}
+
 char	*parse_decimal(va_list *ap, t_pflag *print_flags)
 {
 	char	*str;
 	int		nbr;
 
+	flag_ignore(print_flags);
 	nbr = va_arg((*ap), int);
 	str = ft_flag_itoa(nbr, print_flags);
 	return (str);

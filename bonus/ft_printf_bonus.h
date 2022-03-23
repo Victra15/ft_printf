@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:22:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 18:57:38 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/23 19:53:36 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 typedef struct s_pflag
 {
 	int	alter_form;
-	int	zero_pad;
-	int	left_adjust;
 	int	add_blank;
 	int	sign_display;
-	int	width;
 	int	precision;
+	int	zero_pad;
+	int	left_adjust;
+	int	width;
 }t_pflag;
 
 int				ft_printf(const char *str, ...);
@@ -49,7 +49,7 @@ char			*parse_lower_hexadecimal(va_list *ap, t_pflag *print_flags);
 char			*parse_upper_hexadecimal(va_list *ap, t_pflag *print_flags);
 char			*parse_etc(char format_char, t_pflag *print_flags);
 
-int				is_invalid_flag(const char parse_char, t_pflag print_flags);
+int				is_invalid_flag(t_pflag print_flags);
 int				ft_isdigit_except_0(int c);
 void			init_flags(t_pflag *print_flags);
 unsigned int	ft_atoui_precision_iter(const char **str);

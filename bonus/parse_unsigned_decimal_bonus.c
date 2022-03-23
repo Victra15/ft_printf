@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:41:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 19:57:09 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/23 20:02:18 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,18 @@ static char	*ft_flag_uitoa(unsigned int n, t_pflag *print_flags)
 	return (i_str);
 }
 
+static void	flag_ignore(t_pflag *print_flags)
+{
+	print_flags->add_blank = 0;
+	print_flags->sign_display = 0;
+}
+
 char	*parse_unsigned_decimal(va_list *ap, t_pflag *print_flags)
 {
 	unsigned int	nbr;
 	char			*str;
 
+	flag_ignore(print_flags);
 	nbr = va_arg((*ap), int);
 	str = ft_flag_uitoa(nbr, print_flags);
 	return (str);

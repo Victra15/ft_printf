@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:08:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 18:58:18 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/23 19:47:05 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	read_format_str(va_list *ap,
 	(*iter)++;
 	if ((*format_str) == NULL)
 		return (1);
-	if (is_invalid_flag(*iter, *print_flags))
+	if (is_invalid_flag(*print_flags))
 	{
 		free((*format_str));
 		(*format_str) = NULL;

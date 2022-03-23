@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:36:33 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/22 19:57:05 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/23 20:00:32 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,6 @@ static size_t	ft_intlen(unsigned long long n, t_pflag *print_flags)
 	return (len);
 }
 
-static char	to_hex_str(unsigned long long nbr)
-{
-	int	abs_digit_nbr;
-
-	abs_digit_nbr = (nbr % 16);
-	if (abs_digit_nbr < 10)
-		return ('0' + abs_digit_nbr);
-	else
-		return ('a' - 10 + abs_digit_nbr);
-}
-
 static void	ft_str_input(char *i_str, unsigned long long n, size_t len)
 {
 	i_str[len] = '\0';
@@ -51,7 +40,10 @@ static void	ft_str_input(char *i_str, unsigned long long n, size_t len)
 	}
 	while (n)
 	{
-		i_str[len] = to_hex_str(n);
+		if ((n % 16) < 10)
+			i_str[len] = ('0' + (n % 16));
+		else
+			i_str[len] = ('a' - 10 + (n % 16));
 		n = n / 16;
 		len--;
 	}
@@ -73,11 +65,19 @@ static char	*ft_flag_ptoa(unsigned long long n, t_pflag *print_flags)
 	return (i_str);
 }
 
+static void	flag_ignore(t_pflag *print_flags)
+{
+	print_flags->alter_form = 1;
+	print_flags->add_blank = 0;
+	print_flags->sign_display = 0;
+}
+
 char	*parse_ptr(va_list *ap, t_pflag *print_flags)
 {
 	void	*ptr;
 	char	*str;
 
+	flag_ignore(print_flags);
 	ptr = va_arg((*ap), void *);
 	str = ft_flag_ptoa((unsigned long long) ptr, print_flags);
 	return (str);
