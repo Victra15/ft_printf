@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 20:05:33 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/23 20:01:49 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/25 03:32:47 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@ static size_t	ft_intlen(unsigned int n, t_pflag *print_flags)
 
 	len = 0;
 	if (n == 0)
+	{
+		print_flags->alter_form = 0;
 		len++;
+	}
 	while (n)
 	{
 		n = n / 16;
 		len++;
 	}
-	if (print_flags->precision - len > 0)
-		len += (print_flags->precision - len);
+	if ((int)(print_flags->precision - len) > 0)
+		len += (int)(print_flags->precision - len);
 	if (print_flags->alter_form == 1)
 		len += 2;
 	return (len);

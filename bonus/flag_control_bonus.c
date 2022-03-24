@@ -6,26 +6,33 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:03:43 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/23 19:47:23 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/25 03:20:50 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	is_invalid_flag(t_pflag print_flags)
+int	is_invalid_flag(t_pflag *print_flags)
 {
 	int	max_precision;
 
-	max_precision = 2147483647 - 1;
-	if (print_flags.width == -1)
-		return (1);
-	if ((print_flags.add_blank == 1 || print_flags.sign_display == 1))
+	max_precision = MAX_INT - 1;
+	if (print_flags->width >= MAX_INT - 1)
+	{
+		print_flags->error_flag = 1;
+		if (print_flags->width < MAX_LONG_LONG)
+			return (print_flags->error_flag);
+	}
+	if ((print_flags->add_blank == 1 || print_flags->sign_display == 1))
 		max_precision -= 1;
-	if (print_flags.alter_form == 1)
+	if (print_flags->alter_form == 1)
 		max_precision -= 2;
-	if (print_flags.precision >= max_precision)
-		return (1);
-	return (0);
+	if ((int)(print_flags->precision) >= max_precision)
+	{
+		print_flags->error_flag = 1;
+		return (print_flags->error_flag);
+	}
+	return (print_flags->error_flag);
 }
 
 int	ft_isdigit_except_0(int c)
@@ -45,6 +52,7 @@ void	init_flags(t_pflag *print_flags)
 	print_flags->sign_display = 0;
 	print_flags->width = 0;
 	print_flags->precision = -1;
+	print_flags->error_flag = 0;
 }
 
 unsigned int	ft_atoui_precision_iter(const char **str)
@@ -58,10 +66,11 @@ unsigned int	ft_atoui_precision_iter(const char **str)
 		conv_num = (conv_num * 10) + ((**str) - '0');
 		(*str)++;
 	}
+	(*str)--;
 	return (conv_num);
 }
 
-int	ft_atoi_width_iter(const char **str)
+long long	ft_atoi_width_iter(const char **str)
 {
 	long long	conv_num;
 
@@ -71,7 +80,6 @@ int	ft_atoi_width_iter(const char **str)
 		conv_num = (conv_num * 10) + ((**str) - '0');
 		(*str)++;
 	}
-	if (conv_num > 2147483645)
-		conv_num = 2147483646;
-	return ((int)(conv_num));
+	(*str)--;
+	return (conv_num);
 }

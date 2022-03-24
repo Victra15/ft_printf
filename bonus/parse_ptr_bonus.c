@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:36:33 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/23 20:00:32 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/25 01:52:15 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static size_t	ft_intlen(unsigned long long n, t_pflag *print_flags)
 		n = n / 16;
 		len++;
 	}
-	if (print_flags->precision - len > 0)
-		len += (print_flags->precision - len);
+	if ((int)(print_flags->precision - len) > 0)
+		len += (int)(print_flags->precision - len);
 	return (len);
 }
 

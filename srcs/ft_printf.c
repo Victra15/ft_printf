@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:21:19 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/17 18:16:01 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/24 15:24:31 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ static void	print_format_str(va_list *ap, const char **iter, int *print_len)
 		parse_lower_hexadecimal(ap, print_len);
 	else if (format_char == 'X')
 		parse_upper_hexadecimal(ap, print_len);
-	else if (format_char == '%')
-		parse_percent(print_len);
 	else
-		return ;
+		parse_etc(format_char, print_len);
 	(*iter)++;
 }
 

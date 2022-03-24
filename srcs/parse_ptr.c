@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptoa.c                                          :+:      :+:    :+:   */
+/*   parse_ptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 19:07:45 by yolee             #+#    #+#             */
-/*   Updated: 2022/02/25 19:54:01 by yolee            ###   ########.fr       */
+/*   Created: 2022/03/22 18:36:33 by yolee             #+#    #+#             */
+/*   Updated: 2022/03/24 15:31:43 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_str_input(char *i_str, unsigned long long n, size_t len)
 	}
 }
 
-char	*ft_ptoa(unsigned long long n)
+static char	*ft_ptoa(unsigned long long n)
 {
 	char	*i_str;
 	size_t	i_len;
@@ -65,4 +65,18 @@ char	*ft_ptoa(unsigned long long n)
 		return (0);
 	ft_str_input(i_str, n, i_len);
 	return (i_str);
+}
+
+void	parse_ptr(va_list *ap, int *print_len)
+{
+	void	*ptr;
+	char	*str;
+	size_t	len;
+
+	ptr = va_arg((*ap), void *);
+	str = ft_ptoa((unsigned long long) ptr);
+	len = ft_strlen(str);
+	write(1, str, len);
+	(*print_len) += len;
+	free(str);
 }

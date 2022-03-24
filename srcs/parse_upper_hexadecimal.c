@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uitoa.c                                         :+:      :+:    :+:   */
+/*   parse_upper_hexadecimal.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 19:07:45 by yolee             #+#    #+#             */
-/*   Updated: 2022/02/25 19:07:16 by yolee            ###   ########.fr       */
+/*   Created: 2022/03/22 18:47:02 by yolee             #+#    #+#             */
+/*   Updated: 2022/03/24 15:46:10 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,21 @@ static size_t	ft_intlen(unsigned int n)
 		return (1);
 	while (n)
 	{
-		n = n / 10;
+		n = n / 16;
 		len++;
 	}
 	return (len);
+}
+
+static char	to_hex_str(unsigned int nbr)
+{
+	unsigned int	abs_digit_nbr;
+
+	abs_digit_nbr = nbr % 16;
+	if (abs_digit_nbr < 10)
+		return ('0' + abs_digit_nbr);
+	else
+		return ('A' - 10 + abs_digit_nbr);
 }
 
 static void	ft_str_input(char *i_str, unsigned int n, size_t len)
@@ -35,13 +46,13 @@ static void	ft_str_input(char *i_str, unsigned int n, size_t len)
 		i_str[0] = '0';
 	while (n)
 	{
-		i_str[len] = '0' + n % 10;
-		n = n / 10;
+		i_str[len] = to_hex_str(n);
+		n = n / 16;
 		len--;
 	}
 }
 
-char	*ft_uitoa(unsigned int n)
+static char	*ft_uitoa_hex(unsigned int n)
 {
 	char	*i_str;
 	size_t	i_len;
@@ -52,4 +63,18 @@ char	*ft_uitoa(unsigned int n)
 		return (0);
 	ft_str_input(i_str, n, i_len);
 	return (i_str);
+}
+
+void	parse_upper_hexadecimal(va_list *ap, int *print_len)
+{
+	int		nbr;
+	char	*str;
+	size_t	len;
+
+	nbr = va_arg((*ap), int);
+	str = ft_uitoa_hex(nbr);
+	len = ft_strlen(str);
+	write(1, str, len);
+	(*print_len) += len;
+	free(str);
 }
