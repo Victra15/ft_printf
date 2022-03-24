@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:19:46 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/25 03:31:57 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/25 04:19:06 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	main(void)
 	b = 10;
 	printf("[ft_printf] ");
 	printf("\n");
-	ft_ret = ft_printf(" %#x ", LONG_MIN);
+	ft_ret = ft_printf(" %c ", 0);
 	printf("\n");
 	printf("return : %d", ft_ret);
 	printf("\n");
 	printf("[printf] ");
 	printf("\n");
-	ret = printf(" %#x ", LONG_MIN);
+	ret = printf(" %c ", 0);
 	printf("\n");
 	printf("return : %d", ret);
 	printf("\n");

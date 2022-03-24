@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:03:43 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/25 03:20:50 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/25 04:01:13 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_invalid_flag(t_pflag *print_flags)
 		print_flags->error_flag = 1;
 		return (print_flags->error_flag);
 	}
-	return (print_flags->error_flag);
+	return (0);
 }
 
 int	ft_isdigit_except_0(int c)
@@ -52,7 +52,6 @@ void	init_flags(t_pflag *print_flags)
 	print_flags->sign_display = 0;
 	print_flags->width = 0;
 	print_flags->precision = -1;
-	print_flags->error_flag = 0;
 }
 
 unsigned int	ft_atoui_precision_iter(const char **str)

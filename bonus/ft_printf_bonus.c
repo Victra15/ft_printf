@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:21:19 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/25 02:58:23 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/25 04:18:06 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,15 @@ static void	cat_padding(char *p_str,
 
 static int	print_format_str(char **format_str,
 		t_pflag *print_flags,
-		int *print_len)
+		int *print_len,
+		char parse_char)
 {
 	size_t	f_str_len;
 	size_t	p_str_len;
 	char	*print_str;
 
 	f_str_len = ft_strlen(*format_str);
+	null_chr_add((*format_str), &f_str_len, parse_char);
 	p_str_len = f_str_len;
 	if ((int)(print_flags->width - f_str_len) > 0)
 		p_str_len += (int)(print_flags->width - f_str_len);
@@ -83,17 +85,16 @@ static void	print_substr(const char *start, const char *end, int *print_len)
 
 static int	print_parsed_str(va_list *ap, const char *str, int *print_len)
 {
-	const char	*iter;
 	const char	*temp_iter_1;
 	const char	*temp_iter_2;
 	char		*format_str;
 	t_pflag		print_flags;
 
-	iter = str;
+	print_flags.error_flag = 0;
 	while (1)
 	{
 		init_flags(&print_flags);
-		temp_iter_1 = iter;
+		temp_iter_1 = str;
 		temp_iter_2 = ft_strchr(temp_iter_1, '%');
 		if (!temp_iter_2)
 		{
@@ -101,12 +102,13 @@ static int	print_parsed_str(va_list *ap, const char *str, int *print_len)
 			print_substr(temp_iter_1, temp_iter_2, print_len);
 			return (print_flags.error_flag);
 		}
-		iter = temp_iter_2 + 1;
-		if (read_format_str(ap, &iter, &print_flags, &format_str))
+		str = temp_iter_2 + 1;
+		if (read_format_str(ap, &str, &print_flags, &format_str))
 			return (print_flags.error_flag);
 		print_substr(temp_iter_1, temp_iter_2, print_len);
-		if (print_format_str(&format_str, &print_flags, print_len))
+		if (print_format_str(&format_str, &print_flags, print_len, *str))
 			return (print_flags.error_flag);
+		str++;
 	}
 }
 

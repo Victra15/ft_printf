@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:22:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/25 03:15:41 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/25 04:16:55 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void			init_flags(t_pflag *print_flags);
 unsigned int	ft_atoui_precision_iter(const char **str);
 long long		ft_atoi_width_iter(const char **str);
 char			*parse_char(va_list *ap, t_pflag *print_flags);
+void			null_chr_add(char *format_str,
+					size_t *f_str_len,
+					char parse_char);
 char			*parse_str(va_list *ap, t_pflag *print_flags);
 char			*parse_ptr(va_list *ap, t_pflag *print_flags);
 char			*parse_decimal(va_list *ap, t_pflag *print_flags);

@@ -6,11 +6,17 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:22:23 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/23 19:52:39 by yolee            ###   ########.fr       */
+/*   Updated: 2022/03/25 04:19:49 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+
+void	null_chr_add(char *format_str, size_t *f_str_len, char parse_char)
+{
+	if (parse_char == 'c' && format_str[0] == '\0')
+		(*f_str_len)++;
+}
 
 static void	flag_ignore(t_pflag *print_flags)
 {
