@@ -5,37 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 16:19:46 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/25 04:19:06 by yolee            ###   ########.fr       */
+/*   Created: 2022/05/16 19:30:14 by yolee             #+#    #+#             */
+/*   Updated: 2022/05/22 13:58:39 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <limits.h>
+#include "stdio.h"
 #include "ft_printf_bonus.h"
 
 int	main(void)
 {
-	int		ft_ret;
-	int		ret;
-	int		a;
-	int		b;
-	
+	int ret;
+	int a;
+
 	a = 10;
-	b = 10;
-	printf("[ft_printf] ");
-	printf("\n");
-	ft_ret = ft_printf(" %c ", 0);
-	printf("\n");
-	printf("return : %d", ft_ret);
-	printf("\n");
-	printf("[printf] ");
-	printf("\n");
-	ret = printf(" %c ", 0);
-	printf("\n");
-	printf("return : %d", ret);
-	printf("\n");
-	printf("\n");
+	write(1, "output [", 8);
+	ret = ft_printf("this is a %s", "");
+	write(1, "]\n", 2);
+	printf("return: %d\n", ret);
+	
+	printf("output [");
+	ret = printf("this is a %s", "");
+	printf("]\n");
+	printf("return: %d\n", ret);
+
 	return (0);
 }

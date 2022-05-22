@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:21:19 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/25 04:18:06 by yolee            ###   ########.fr       */
+/*   Updated: 2022/05/22 14:25:46 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	print_format_str(char **format_str,
 	p_str_len = f_str_len;
 	if ((int)(print_flags->width - f_str_len) > 0)
 		p_str_len += (int)(print_flags->width - f_str_len);
-	print_str = (char *)malloc(sizeof(char) * p_str_len);
+	print_str = (char *)malloc(sizeof(char) * p_str_len + 1);
 	if (print_str == NULL)
 	{
 		print_flags->error_flag = 1;

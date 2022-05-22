@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:03:43 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/25 04:01:13 by yolee            ###   ########.fr       */
+/*   Updated: 2022/05/22 12:21:20 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	init_flags(t_pflag *print_flags)
 	print_flags->precision = -1;
 }
 
-unsigned int	ft_atoui_precision_iter(const char **str)
+unsigned long long	ft_atoui_precision_iter(const char **str)
 {
-	unsigned int	conv_num;
+	unsigned long long	conv_num;
 
 	(*str)++;
 	conv_num = 0;

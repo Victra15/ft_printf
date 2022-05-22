@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:08:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/25 04:11:06 by yolee            ###   ########.fr       */
+/*   Updated: 2022/05/16 20:00:02 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ static void	read_flags(const char **iter, t_pflag *print_flags)
 		else if (ft_isdigit_except_0(**iter))
 			print_flags->width = ft_atoi_width_iter(iter);
 		else if ((**iter) == '.')
+		{
+			print_flags->zero_pad = 0;
 			print_flags->precision = ft_atoui_precision_iter(iter);
+		}
 		else
 			break ;
 		(*iter)++;

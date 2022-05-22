@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:41:06 by yolee             #+#    #+#             */
-/*   Updated: 2022/03/24 19:18:06 by yolee            ###   ########.fr       */
+/*   Updated: 2022/05/22 09:32:20 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static size_t	ft_intlen(unsigned int n, t_pflag *print_flags)
 
 	len = 0;
 	if (n == 0)
-		len++;
+		if (print_flags->precision != 0)
+			len++;
 	while (n)
 	{
 		n = n / 10;
@@ -32,6 +33,8 @@ static size_t	ft_intlen(unsigned int n, t_pflag *print_flags)
 static void	ft_str_input(char *i_str, unsigned int n, size_t len)
 {
 	i_str[len] = '\0';
+	if (len == 0)
+		return ;
 	len--;
 	if (n == 0)
 		i_str[len] = '0';
